@@ -301,7 +301,8 @@ Part 4 of the Demo: Travis-ci
 ***************************************
 
 So far we have been launching our Unit Tests from command-line at will, but wouldn't that be great if this process of launching tests was automatic?  What if every time the developer pushed her changes to the repository we would run these tests automatically and verify the new/modified code!  To reach that aim in our testing we would use Travis-ci or a similar service.  Please visit this site:
-travis-ci.org
+https://travis-ci.org  <-- public repositories (this demo)
+https://travis-ci.com  <-- private    //
 and click on PHP as a language choice.  There are many other.
 
 To use the Travis service I had to open a free Travis account and connect it to the Github repository which the calculator project is kept at, but I had to be the admin of the Github repository:
@@ -395,6 +396,70 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
 ?>
 
 Of course you still need to take this generated CalculatorTest.php and modify it to you testing needs but some of the leg work is already done for you which would save you time and avoid mistakes.  
+
+
+
+~>phpunit-skelgen --help
+phpunit-skelgen 2.0.1 by Sebastian Bergmann.
+
+Usage:
+ help [--xml] [--format="..."] [--raw] [command_name]
+
+Arguments:
+ command               The command to execute
+ command_name          The command name (default: "help")
+
+Options:
+ --xml                 To output help as XML
+ --format              To output help in other formats (default: "txt")
+ --raw                 To output raw command help
+ --help (-h)           Display this help message.
+ --quiet (-q)          Do not output any message.
+ --verbose (-v|vv|vvv) Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+ --version (-V)        Display this application version.
+ --ansi                Force ANSI output.
+ --no-ansi             Disable ANSI output.
+ --no-interaction (-n) Do not ask any interactive question.
+
+Help:
+ The help command displays help for a given command:
+
+   php /usr/local/bin/phpunit-skelgen help list
+
+ You can also output the help in other formats by using the --format option:
+
+   php /usr/local/bin/phpunit-skelgen help --format=xml list
+
+ To display the list of available commands, please use the list command.
+~>
+
+
+~>phpunit-skelgen --list
+phpunit-skelgen 2.0.1 by Sebastian Bergmann.
+
+phpunit-skelgen version 2.0.1
+
+Usage:
+  [options] command [arguments]
+
+Options:
+  --help           -h Display this help message.
+  --quiet          -q Do not output any message.
+  --verbose        -v|vv|vvv Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+  --version        -V Display this application version.
+  --ansi              Force ANSI output.
+  --no-ansi           Disable ANSI output.
+  --no-interaction -n Do not ask any interactive question.
+
+Available commands:
+  generate-class   Generate a class based on a test class
+  generate-test    Generate a test class based on a class
+  help             Displays help for a command
+  list             Lists commands
+~>
+
+
+
 
 I hope this demo helps you with your Unit Testing.
 
