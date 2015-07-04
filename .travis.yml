@@ -5,7 +5,7 @@ php:
   - 5.6
   - hhvm
 
-script: phpunit -c phpunit.xml --coverage-text
+script: phpunit -c phpunit.xml --debug
 
 notifications:
   email:
