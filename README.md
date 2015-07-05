@@ -49,6 +49,15 @@ class Calculator
 ?>
 
 To test the Calculator class we would write the CalculatorTest.php
+
+But first some notes to consider:
+1. The tests for a class Class go into a class ClassTest.
+2. ClassTest inherits (most of the time) from PHPUnit_Framework_TestCase.
+3. The tests are public methods that are named test*.  Alternatively, you can use the @test annotation in a method's docblock to mark it as a test method.
+4. Inside the test methods, assertion methods such as assertEquals()
+are used to assert that an actual value matches an expected value.
+
+
 <?php
 require dirname(__DIR__) . '/src/Calculator.php';
 class CalculatorTest extends PHPUnit_Framework_TestCase
@@ -174,7 +183,23 @@ cat .bash_profile
 
 export PATH="~/myphp/vendor/phpunit/phpunit/composer/bin:$PATH"
 
-As you can see I have been using composer to help me install.
+After which my $PATH would be:
+~/demo/calculator (master)>echo $PATH
+~/myphp/vendor/phpunit/phpunit/composer/bin:/USR/local/cellar/mongodb/2.6.5/bin:/usr/local/heroku/bin:/usr/local/apache-maven/apache-maven-3.2.5/bin: and so on ...
+
+As you can see I have been using composer (https://getcomposer.org/) to help me install.
+
+Here is the composer.json I am using:
+
+~/myphp>cat composer.json
+{
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "phpunit/phpunit-skeleton-generator": "*",
+        "phpunit/phpunit-story": "*"
+    }
+}
+
 
 We are ready to test.  Lets test our Calculator class with the tests we got:
 
@@ -186,7 +211,7 @@ Or the following which defaults to using the phpunit.xml.  But, lets add --debug
 ~/demo/calculator (master)>phpunit --debug
 PHPUnit 3.7.38 by Sebastian Bergmann.
 
-Configuration read from /Users/mamiraslani/demo/calculator/phpunit.xml
+Configuration read from /Users/{my username}/demo/calculator/phpunit.xml
 
 
 Starting test 'CalculatorTest::testAddition'.
@@ -310,18 +335,28 @@ https://github.com/babak51/calculator
 
 You would also need to add a .travis.yml (a hidden file) to the project folder.  Lets examine the .yml file which tells the Travis Service how to test your code:
 
+--------
 language: php
 php:
   - 5.4
   - 5.5
   - 5.6
   - hhvm
+script: phpunit -c phpunit.xml --debug
+notifications:
+  email:
+    recipients:
+      - baamira@yahoo.com
+      - joetester@testland.com
+    on_success: always # [always|never|change] default: change
+    on_failure: always # [always|never|change] default: always
+--------
 
   Remember this is a .yml file and positions matter.
   We are telling Travis to try out the PHP versions 5.4, 5.5, and 5.6.  Remember the PHP version on my PC was 5.4.30.  But I like to see how the code works on other versions as well. 
 
 
-The last line of the .yml file is "- hhvm".  what is hhvm?  You might ask.   HHVM Works as a self contained web server that executes PHP scripts, replacing Apache and mod-PHP altogether.
+The last line of the .yml file is "- hhvm".  what is hhvm?  You might ask.   HHVM Works as a self contained web server that executes PHP scripts, replacing Apache and mod-PHP altogether.  HHVM is currently Facebook’s preferred PHP interpreter.
     
 You can see the results of the builds on the Travis site.  Try changing something in your src/calculator.php file.  I changed the author's first name.  Now using Git commands like git status, git fetch, git pull, git add, git commit, and git push, push your change(s).  A final "git status" command should tell you "nothing to commit, working directory clean".  You can inspect the repository and see if your change(s) have been commited to the master branch (in our simple example).
 
@@ -462,6 +497,7 @@ Available commands:
 
 
 I hope this demo helps you with your Unit Testing.
+
 
 -Best
 
