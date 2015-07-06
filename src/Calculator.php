@@ -1,7 +1,7 @@
 <?php
 /**
 * PHPUnit Unit Testing Demo
-* @author Jack Tester
+* @author Joe Tester
 */
 class Calculator
 {
